@@ -7,11 +7,11 @@ c DATE      : 06/08/1997
 c
 c PURPOSE   : This program does a numerical integration 
 c           : between 0 and 1 for the function ln(1+x)/x
-c           : using both the Trapezoidal and Simpson's
+c           : using both the Trapezoidal and Simpsons
 c           : rules for quadrature.
 c-------------------------------------------------------------
 
-	program main
+      program main
       implicit none
       integer*4 n, i
       real*8 result, false_position, tolx, answer, error
@@ -28,27 +28,27 @@ c-------------------------------------------------------------
             n = n*10
             tolx = 1.0d0/dfloat(n)
 10    continue
-	end
+      end
 
 c-------------------------------------------------------------
 c FUNCTION	: g
 c PURPOSE	: returns t**2
 c-------------------------------------------------------------
 
-	double precision function g(t)
-	implicit none
-	real*8 t
-	g = t**2
-	return
-	end
+      double precision function g(t)
+      implicit none
+      real*8 t
+      g = t**2
+      return
+      end
 
 c-------------------------------------------------------------
 c SUBROUTINE	: simpson
 c PURPOSE		: calculates the integral between a and b
-c                 : for the function g(x)
+c               : for the function g(x)
 c-------------------------------------------------------------
 
-	double precision function simpson(n, a, b)
+      double precision function simpson(n, a, b)
       implicit none
       integer*4 n, i, factor
       real*8 a, b
@@ -73,10 +73,10 @@ c-------------------------------------------------------------
       sum = sum + g(a) + g(b)
       sum = (h*sum)/3.0d0
 
-	simpson = sum
-	return
+     simpson = sum
+     return
 
-	end
+     end
 
 c-------------------------------------------------------------
 c FUNCTION  : f
@@ -87,13 +87,13 @@ c           : c. When a = 0 and b = x, we have
 c           : f = Integrate[t**2 dt,0,x] - x
 c-------------------------------------------------------------
 
-	double precision function f(n,a,b)
-	implicit none
-	integer*4 n
-	real*8 a, b, simpson
-	f = simpson(n,a,b) - b 
-	return
-	end
+      double precision function f(n,a,b)
+      implicit none
+      integer*4 n
+      real*8 a, b, simpson
+      f = simpson(n,a,b) - b 
+      return
+      end
 
 c-------------------------------------------------------------
 c FUNCTION  : false_position

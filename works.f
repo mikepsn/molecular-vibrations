@@ -2,29 +2,28 @@ c-------------------------------------------------------------
 c PROGRAM 	: ROOT FINDING
 c-------------------------------------------------------------
 
-	program main
+     program main
 c		call false_position(10, 1.0d0, 0.001d0)
             call new_false_position(0.33d0, 0.0d0, 0.00000001d0)
-	end
+     end
 
 c-------------------------------------------------------------
 c FUNCTION	: g
 c PURPOSE	: returns t**2
 c-------------------------------------------------------------
 
-	double precision function g(t)
-	implicit none
-	real*8 t
-	g = t**2
-	return
-	end
+     double precision function g(t)
+     implicit none
+     real*8 t
+     g = t**2
+     return
+     end
 
 c-------------------------------------------------------------
 c SUBROUTINE	: simpson
-c PURPOSE		:
 c-------------------------------------------------------------
 
-	double precision function simpson(n, a, b)
+      double precision function simpson(n, a, b)
       implicit none
       integer*4 n, i, factor
       real*8 a, b, answer
@@ -49,60 +48,57 @@ c-------------------------------------------------------------
       sum = sum + g(a) + g(b)
       sum = (h*sum)/3.0d0
 
-	simpson = sum
-	return
+      simpson = sum
+      return
 
-	end
+      end
 
 c-------------------------------------------------------------
-c FUNCTION  : 
-c PURPOSE   :
+c FUNCTION  : f
 c-------------------------------------------------------------
 
-	double precision function f(n,a,b)
-	implicit none
-	integer*4 n
-	real*8 a, b, simpson, g
-	f = simpson(n,a,b) - g(b) 
-	return
-	end
+      double precision function f(n,a,b)
+      implicit none
+      integer*4 n
+      real*8 a, b, simpson, g
+      f = simpson(n,a,b) - g(b) 
+      return
+      end
 
 c-------------------------------------------------------------
 c FUNCTION  : false_position
-c PURPOSE   :
 c-------------------------------------------------------------
 
       subroutine false_position(n,start,tolerance)  
-	implicit none
-	integer*4 n
-	real*8 start, tolerance
-	real*8 f
-	real*8 h, a, b, x1, x2, x3, f1, f2, f3
+      implicit none
+      integer*4 n
+      real*8 start, tolerance
+      real*8 f
+      real*8 h, a, b, x1, x2, x3, f1, f2, f3
 
-	a = 0.0d0
-	b = start
-	h = (b-a)/dfloat(n)
-	x1 = start
-	x2 = x1 + h
-	f1 = f(n,a, x1)
-	f2 = f(n,a, x2)
+      a = 0.0d0
+      b = start
+      h = (b-a)/dfloat(n)
+      x1 = start
+      x2 = x1 + h
+      f1 = f(n,a, x1)
+      f2 = f(n,a, x2)
 
-	write(*,*) 'f1 = ', f1
-	write(*,*) 'f2 = ', f2
+      write(*,*) 'f1 = ', f1
+      write(*,*) 'f2 = ', f2
 
-	do while (f1*f2 .ge. 0.0d0)
-		x2 = x1 + h
-		f1 = f(n,a,x1)
-		f1 = f(n,a,x2)
-		write(*,*) 'f1 = ', f1
+      do while (f1*f2 .ge. 0.0d0) 
+        x2 = x1 + h 
+        f1 = f(n,a,x1) 
+        f1 = f(n,a,x2) 
+        write(*,*) 'f1 = ', f1
 c		write(*,*) 'f2 = ', f2
-	end do
+      end do
 
-	end
+      end
 
 c-------------------------------------------------------------
 c FUNCTION  : new_false_position
-c PURPOSE   :
 c-------------------------------------------------------------
       
       double precision function func(x)

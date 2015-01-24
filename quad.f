@@ -1,5 +1,5 @@
 c-------------------------------------------------------------
-c PROGRAM   : QUADRATURE - TRAPEZOIDAL AND SIMPSON'S RULES
+c PROGRAM   : QUADRATURE - TRAPEZOIDAL AND SIMPSONS RULES
 c 
 c SUBJECT   : 640-364 COMPUTATIONAL PHYSICS
 c NAME      : MICHAEL PAPASIMEON
@@ -7,10 +7,10 @@ c DATE      : 30/07/1997
 c
 c PURPOSE   : This program does a numerical integration 
 c           : between 0 and 1 for the function ln(1+x)/x
-c           : using both the Trapezoidal and Simpson's
+c           : using both the Trapezoidal and Simpsons
 c           : rules for quadrature.
 c-------------------------------------------------------------
-	
+
       program main
             call all_trapezoidals
             call all_simpsons
@@ -87,19 +87,20 @@ c-------------------------------------------------------------
       implicit none 
       integer*4 n
       real*8 a, b, answer
-	integer*4 i
+      integer*4 i
       real*8 error, h, sum, x, f 
 
-	i = 0
+      i = 0
       sum = 0.0d0
       x = 0.0d0
       h = (b-a)/dfloat(n)
 
-	do 100 i = 1, (n-1), +1
-		x = a + i*h
-		sum = sum + 2.0d0*f(x)
+      do 100 i = 1, (n-1), +1 
+        x = a + i*h 
+        sum = sum + 2.0d0*f(x)
 100   continue
-	sum = sum + f(a) + f(b)
+
+      sum = sum + f(a) + f(b)
       sum = (0.5d0)*h*sum
       error = abs(sum - answer)
 
@@ -148,7 +149,6 @@ c-------------------------------------------------------------
 
 c-------------------------------------------------------------
 c SUBROUTINE : simpson
-c PURPOSE    :
 c-------------------------------------------------------------
 
       subroutine simpson(n, a, b, answer)
@@ -163,15 +163,15 @@ c-------------------------------------------------------------
       x = 0.0d0
       h = (b-a)/dfloat(n)
 
-	do 300 i = 1, (n-1), +1
-		x = a+i*h
-		if (factor .eq. 2) then 
-			sum = sum + 2*f(x) 
-			factor = 4 
-		else
-            	sum = sum + 4*f(x) 
-			factor = 2
-		endif
+      do 300 i = 1, (n-1), +1 
+        x = a+i*h 
+        if (factor .eq. 2) then 
+            sum = sum + 2*f(x) 
+            factor = 4 
+        else 
+            sum = sum + 4*f(x) 
+            factor = 2 
+        endif
 300   continue
       sum = sum + f(a) + f(b)
       sum = (h*sum)/3.0d0

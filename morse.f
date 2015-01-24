@@ -1,11 +1,11 @@
-c-------------------------------------------------------------
-c PROGRAM	      : main
-c-------------------------------------------------------------
+C-------------------------------------------------------------
+C PROGRAM      : main
+C-------------------------------------------------------------
 
-      program main
-	implicit none
-      integer i, n, step
-      real*8 gamma, en, answer, error, xmin, a
+    program main 
+    implicit none 
+    integer i, n, step 
+    real*8 gamma, en, answer, error, xmin, a
 	real*8 result, tol, false_position
 
       write(*,*)'Enter n, a'
@@ -42,73 +42,73 @@ c-------------------------------------------------------------
 
       write(*,*) '--------------------------------------------'
 
-	end
+      end
 
 c-------------------------------------------------------------
 c FUNCTION        : xin
 c-------------------------------------------------------------
 
-	double precision function xin(en, xmin)    
-	implicit none
-	real*8 en, xmin
+      double precision function xin(en, xmin)    
+      implicit none
+      real*8 en, xmin
 
-	xin = xmin - dlog(1.0d0 + dsqrt(en + 1.0d0))
-	return
+      xin = xmin - dlog(1.0d0 + dsqrt(en + 1.0d0))
+      return
 
-	end
+      end
 
 c-------------------------------------------------------------
 c FUNCTION        : xout
 c-------------------------------------------------------------
 
-	double precision function xout(en, xmin)
-	implicit none
-	real*8 en, xmin
+      double precision function xout(en, xmin)
+      implicit none
+      real*8 en, xmin
 
 c      write(*,*)'[xout]:[en] ',en
-	xout = xmin - dlog(1.0d0 - dsqrt(en + 1.0d0))
-	return
+      xout = xmin - dlog(1.0d0 - dsqrt(en + 1.0d0))
+      return
 
-	end
+      end
 
 c-------------------------------------------------------------
 c FUNCTION        : f
 c-------------------------------------------------------------
 
-	double precision function f(en, n, gamma, step, xmin)
-	implicit none
-	integer*4 n, step
-	real*8 xin, xout, simpson
-	real*8 en, xmin, gamma, xi, xo, pi
+      double precision function f(en, n, gamma, step, xmin)
+      implicit none
+      integer*4 n, step
+	  real*8 xin, xout, simpson
+	  real*8 en, xmin, gamma, xi, xo, pi
 
-	pi = 4*atan(1.0d0)
-	xi = xin(en, xmin)
-	xo = xout(en, xmin)
+      pi = 4*atan(1.0d0)
+      xi = xin(en, xmin)
+      xo = xout(en, xmin)
 
-	f = gamma*simpson(step,xi,xo,en,xmin) - pi*(dfloat(n) + 0.5d0)
-	return
+      f = gamma*simpson(step,xi,xo,en,xmin) - pi*(dfloat(n) + 0.5d0)
+      return
 
-	end
+      end
 
 c-------------------------------------------------------------
 c FUNCTION        : g
 c PURPOSE         : integrand
 c-------------------------------------------------------------
 
-	double precision function g(en, x, xmin)
-	implicit none
-	real*8 en, xmin, x, v, arg
+      double precision function g(en, x, xmin)
+      implicit none
+      real*8 en, xmin, x, v, arg
 
       arg = en - v(x, xmin)
 
-      if (dabs(arg) .lt. 1.0E-14) then
-            g = 0.0d0
-	else
-            g = dsqrt(arg)
+      if (dabs(arg) .lt. 1.0E-14) then 
+        g = 0.0d0
+      else 
+        g = dsqrt(arg)
       endif
-	return
+      return
 
-	end
+      end
 
 c-------------------------------------------------------------
 c FUNCTION        : v   
@@ -116,14 +116,14 @@ c PURPOSE         : potential
 c-------------------------------------------------------------
 
 
-	double precision function v(x, xmin)
-	implicit none
-	real*8 x, xmin
+      double precision function v(x, xmin)
+      implicit none
+      real*8 x, xmin
 
-	v = (1 - dexp(-(x - xmin)))**2.0d0 - 1.0d0
-	return
+      v = (1 - dexp(-(x - xmin)))**2.0d0 - 1.0d0
+      return
 
-	end
+      end
 
 c-------------------------------------------------------------
 c FUNCTION        : simpson

@@ -105,6 +105,14 @@
 \maketitle
 %\thispagestyle{plain} 
 
+\begin{abstract}
+This paper was written for an introductory undegraduate class in computational
+physics in 1997. It focuses on basic computational/numerical techniques
+for quadrature and root finding. It then applies these techniques to finding 
+the energy levels of molecular hydrogen $H_2$ using a semi-classical quantization 
+approach. The source code listings in \textsc{Fortran77} can be found in the appendices.
+\end{abstract} 
+
 %----------------------------------------------------------------------
 % QUADRATURE
 %----------------------------------------------------------------------
@@ -696,9 +704,9 @@
 
       Using the data for the first four quantized energy levels, we can
       plot these on top of the Morse potential plot, shown in 
-      Figure~\ref{fig:levels} 
+      Figure~\ref{fig:levels}. 
 
-        \begin{figure}
+        \begin{figure}[ht] 
         \centering
         \includegraphics[width=0.8\columnwidth]{levels.eps} 
         \caption{First Four Quantized Energy Levels} 
